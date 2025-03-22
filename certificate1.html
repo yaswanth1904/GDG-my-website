@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GCCF Certificate Generator</title>
+  <style>
+    /* General Styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-image: url("https://financialit.net/sites/default/files/newsroom-background-google-alliance.jpg");
+      background-size: cover;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Form Container */
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #205781;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #205781;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #173a5a;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Form Section -->
+<div class="container">
+  <h1>GCCF Certificate Generator</h1>
+  <form id="certificateForm" action="./certificate2.html" method="GET">
+    <input type="text" name="participantName" placeholder="Participant Name" required />
+    <input type="text" name="course" placeholder="Course" required />
+    <input type="text" name="college" placeholder="College" required />
+    <button type="submit">Generate Certificate</button>
+  </form>
+</div>
+
+</body>
+</html>

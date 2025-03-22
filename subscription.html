@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Cloud Subscriptions</title>
+    <style>
+        body {
+            font-family: 'Google Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f4f3;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap');
+
+        .subscription-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            width: 340px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            margin: 20px; /* Add margin between cards */
+        }
+
+        .subscription-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .subscription-cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centers the cards horizontally */
+            align-items: stretch; /* Makes cards stretch to equal height */
+        }
+
+
+        .subscription-card h2 {
+            color: #4285f4;
+            margin-bottom: 16px;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .subscription-card p {
+            color: #5f6368;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: 700;
+            color: #202124;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+        }
+
+        .price sup {
+            font-size: 20px;
+            margin-right: 4px;
+        }
+
+        .subscribe-button {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .subscribe-button:hover {
+            background-color: #1a73e8;
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+        }
+
+        .subscribe-button:active {
+            background-color: #185abc;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            transform: translateY(1px);
+        }
+
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+            background-size: cover;
+            display: inline-block;
+        }
+        .arrow {
+   font-size: 3rem;
+   text-decoration: none;
+   color: black;
+}
+a {
+    text-decoration: none;
+    color: #202124;
+}
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="subscription-cards-container">
+        <div class="arrow"><a href="./index2.html">&#8592;</a></div>
+        <div class="subscription-card">
+            <h2>Google Cloud Basic</h2>
+            <p>Ideal for small projects and personal use.  Includes essential services.</p>
+            <div class="price">
+                <sup>$</sup>10<sup>/month</sup>
+            </div>
+            <button class="subscribe-button">
+                <span class="check-icon"></span> Subscribe Now
+            </button>
+        </div>
+
+        <div class="subscription-card">
+            <h2>Google Cloud Standard</h2>
+            <p>For growing businesses.  Offers enhanced support and scalability.</p>
+            <div class="price">
+                <sup>$</sup>49<sup>/month</sup>
+            </div>
+            <button class="subscribe-button">
+                <span class="check-icon"></span> Subscribe Now
+            </button>
+        </div>
+
+        <div class="subscription-card">
+            <h2>Google Cloud Premium</h2>
+            <p>Enterprise-grade solution with dedicated support and maximum resources.</p>
+            <div class="price">
+                <sup>$</sup>99<sup>/month</sup>
+            </div>
+            <button class="subscribe-button">
+                <span class="check-icon"></span> Subscribe Now
+            </button>
+        </div>
+    </div>
+</body>
+</html>

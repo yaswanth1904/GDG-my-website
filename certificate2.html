@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificate</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url("https://t3.ftcdn.net/jpg/09/61/27/48/360_F_961274808_fX06eKzHJDCX9LO1Uew8YsL8Gk7RDZBu.jpg");
+            background-size: cover;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        /* Certificate Styling */
+        .certificate-container {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            width: 720px;
+            height: 500px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .certificate {
+            padding: 15px;
+            border: 2px solid #205781;
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            position: relative;
+        }
+
+        h2, h1, h3 {
+            color: #205781;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-size: 32px;
+        }
+
+        h3 {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        /* Google Cloud Logo */
+        .logo {
+            width: 140px;
+            margin-bottom: 15px;
+        }
+
+        /* QR Code */
+        .qr-code {
+            width: 70px;
+            height: 70px;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            background-color: #fff;
+            display: none;
+        }
+
+                /* GDG Lead Signature */
+                .gdg-lead {
+            position: absolute;
+            bottom: 40px;
+            left: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #205781;
+            padding-bottom: 25px;
+        }
+
+        .signature {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            width: 100px;
+        }
+
+
+        /* Upload & Download Buttons */
+        .upload-container {
+            margin-top: 10px;
+            padding-bottom: 20px;
+        }
+
+        .custom-upload-button, .download-button {
+            display: inline-block;
+            padding: 8px 14px;
+            background-color: #205781;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 14px;
+            
+        }
+
+        .custom-upload-button:hover, .download-button:hover {
+            background-color: #173a5a;
+            
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Upload QR Section -->
+    <div class="upload-container">
+        <input type="file" id="qrUpload" accept="image/*" hidden>
+        <label for="qrUpload" class="custom-upload-button">Upload QR Code</label>
+    </div>
+
+    <div class="certificate-container" id="certificate">
+        <div class="certificate">
+            <!-- Google Cloud Logo (Base64 Image to avoid CORS issues) -->
+            <img id="logo" class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google_Cloud_logo.svg/768px-Google_Cloud_logo.svg.png" alt="Google Cloud Logo" />
+
+            <h2>This acknowledges that</h2>
+            <h1 id="certName"></h1>
+            <p>has successfully completed the</p>
+            <h3 id="certCourse"></h3>
+            <p>from</p>
+            <h3 id="certCollege"></h3>
+            
+            <img id="qrCode" class="qr-code" src="" alt="QR Code">
+
+            <span class="gdg-lead">GDG Lead</span>
+            <img src="./GCG leag sign.jpg" class="signature" alt="Signature">
+
+        </div>
+    </div>
+
+    <button class="download-button" id="downloadPdfBtn">Download Certificate as PDF</button>
+
+    <script>
+        // Populate Certificate with Form Data
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('certName').innerText = urlParams.get('participantName') || '[Participant Name]';
+        document.getElementById('certCourse').innerText = urlParams.get('course') || '[Course Name]';
+        document.getElementById('certCollege').innerText = urlParams.get('college') || '[College Name]';
+
+        // QR Code Upload Handling
+        document.getElementById('qrUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const qrCode = document.getElementById('qrCode');
+                    qrCode.src = e.target.result;
+                    qrCode.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert("Please upload a valid image file.");
+            }
+        });
+
+        // Download Certificate as PDF
+        document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            const certificateElement = document.querySelector('.certificate-container');
+
+            html2canvas(certificateElement, {
+                scale: 2,
+                useCORS: true
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('landscape', 'mm', [720, 500]);
+                pdf.addImage(imgData, 'PNG', 0, 0, 720, 500);
+                pdf.save('certificate.pdf');
+            });
+        });
+    </script>
+
+</body>
+</html>
